@@ -1,0 +1,27 @@
+func main() {
+	z(self_menu(), 999)
+	Scale9Sprite(0.0, 20.0, 200.0, 100.0, "GJ_square01.png")
+
+	lbl := Label(0.0, 47.0, "Text")
+	tag(lbl, 1)
+	scale(lbl, 0.8)
+
+	spr := Sprite(0.0, 10.0, "edit_upBtn_001.png")
+	scale(spr, 0.6)
+	move(spr, -25.0, 0.0)
+	Button(spr, "grow")
+
+	spr2 := Sprite(0.0, 10.0, "edit_downBtn_001.png")
+	scale(spr2, 0.6)
+	move(spr2, 25.0, 0.0)
+	Button(spr2, "shrink")
+}
+
+func shrink() {
+	lbl := fetch(1)
+	runAction(lbl, ScaleBy(0.2, 0.75))
+}
+func grow() {
+	lbl := fetch(1)
+	runAction(lbl, ScaleBy(0.2, 1.5))
+}
