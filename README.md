@@ -10,6 +10,7 @@ These are the functions you can use:
 func Node(): Node // Creates a new CCNode
 func Label(name: str, font: str): Node // Creates a new CCLabelBMFont
 func Sprite(name: str): Node // Creates a new CCSprite
+func WebSprite(url: str): Node // Create a CCSprite from a given url
 func Button(sprite: Node, callback: str): Node // Creates a new button with a sprite and a callback
 func ButtonSprite(name: str, sprite: str): Node // Creates a new sprite for a button
 func Scale9Sprite(width: float, height: float, sprite: str): Node // Creates a new CCScale9Sprite

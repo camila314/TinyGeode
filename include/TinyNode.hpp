@@ -48,6 +48,27 @@ namespace tiny_geode {
 				return spr;
 			});
 
+			bindFunction<"WebSprite(str): Node">([=](std::string url) -> auto {
+				auto req = utils::web::WebRequest().get(url);
+				while (req.isPending()) {}
+
+				auto spr = CCSprite::createWithSpriteFrameName("exMark_001.png");
+
+				if (auto resp = req.getFinishedValue()) {
+					auto img = new CCImage;
+					img->initWithImageData(resp->data().data(), resp->data().size(), CCImage::kFmtUnKnown, 0, 0, 0);
+
+					auto txt = new CCTexture2D;
+					txt->initWithImage(img);
+
+					spr->release();
+					spr = CCSprite::createWithTexture(txt);
+				}
+
+				this->addChild(spr);
+				return spr;
+			});
+
 			bindFunction<"Button(Node, str): Node">([=](CCSprite* sprite, std::string callback) -> auto {
 				auto pos = sprite->getPosition();
 				sprite->removeFromParent();

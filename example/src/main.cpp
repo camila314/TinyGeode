@@ -1,4 +1,6 @@
+#include "Geode/cocos/platform/CCImage.h"
 #include <Geode/Geode.hpp>
+#include <Geode/utils/web.hpp>
 #include <TinyNode.hpp>
 
 using namespace geode::prelude;
