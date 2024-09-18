@@ -6,88 +6,58 @@ Hot-reloadable UI scripting using [Tiny](https://github.com/goodpaul6/Tiny). Che
 
 These are the functions you can use:
 
-	Node(float, float): Node
-		- Creates a CCNode at the given position
-	Label(float, float, str): Node
-		- Creates a CCLabelBMFont at the given position with the given text
-	Sprite(float, float, str): Node
-		- Creates a CCSprite at the given position with the given sprite frame name
-	Button(Node, str): Node
-		- Converts a CCSprite to a CCMenuItemSprite with the given callback
-	Scale9Sprite(float, float, float, float, str): Node
-		- Creates a CCScale9Sprite at the given position with the given size and sprite frame name
+```go
+func Node(): Node // Creates a new CCNode
+func Label(name: str, font: str): Node // Creates a new CCLabelBMFont
+func Sprite(name: str): Node // Creates a new CCSprite
+func Button(sprite: Node, callback: str): Node // Creates a new button with a sprite and a callback
+func ButtonSprite(name: str, sprite: str): Node // Creates a new sprite for a button
+func Scale9Sprite(width: float, height: float, sprite: str): Node // Creates a new CCScale9Sprite
 
-	tag(Node, int): void
-		- Sets the tag of a node
-	fetch(int): Node
-		- Fetches a node by tag
-	visible(Node, bool): void
-		- Sets the visibility of a node
-	pos(Node, float, float): void
-		- Sets the position of a node
-	xpos(Node, float): void
-		- Sets the x position of a node
-	ypos(Node, float): void
-		- Sets the y position of a node
-	move(Node, float, float): void
-		- Moves a node by the given amount
-	scale(Node, float): void
-		- Sets the scale of a node
-	scaleBy(Node, float): void
-		- Scales a node by the given amount
-	rotate(Node, float): void
-		- Sets the rotation of a node
-	rotateBy(Node, float): void
-		- Rotates a node by the given amount
-	z(Node, int): void
-		- Sets the z order of a node
-	child(Node, Node): void
-		- Adds a child to a node
-	runAction(Node, Action): void
-		- Runs an action on a node
-	color(Node, int, int, int): void
-		- Sets the color of a node
-		- Only works for CCRGBAProtocol nodes
-	opacity(Node, int): void
-		- Sets the opacity of a node
-		- Only works for CCRGBAProtocol nodes
-	text(Node, str): void
-		- Sets the text of a node
-		- Only works for CCLabelBMFont nodes
-	font(Node, str): void
-		- Sets the font of a node
-		- Only works for CCLabelBMFont nodes
+func tag(node: Node, tag: int): Node // Sets a tag for a node
+func fetch(node: Node, tag: int): Node // Fetches a child node by tag
+func visible(node: Node, visible: bool): Node // Sets the visibility of a node
+func pos(node: Node, x: float, y: float): Node // Sets the position of a node
+func xpos(node: Node, x: float): Node // Sets the x position of a node
+func ypos(node: Node, y: float): Node // Sets the y position of a node
+func getX(node: Node): float // Gets the x position of a node
+func getY(node: Node): float // Gets the y position of a node
+func move(node: Node, x: float, y: float): Node // Moves a node by x and y
+func size(node: Node, width: float, height: float): Node // Sets the size of a node
+func width(node: Node, width: float): Node // Sets the width of a node
+func height(node: Node, height: float): Node // Sets the height of a node
+func getWidth(node: Node): float // Gets the width of a node
+func getHeight(node: Node): float // Gets the height of a node
+func scale(node: Node, scale: float): Node // Sets the scale of a node
+func scaleX(node: Node, scale: float): Node // Sets the x scale of a node
+func scaleY(node: Node, scale: float): Node // Sets the y scale of a node
+func scaleBy(node: Node, scale: float): Node // Scales a node by a factor
+func rotate(node: Node, angle: float): Node // Sets the rotation of a node
+func rotateBy(node: Node, angle: float): Node // Rotates a node by an angle
+func z(node: Node, z: int): Node // Sets the z order of a node
+func getZ(node: Node): int // Gets the z order of a node
+func child(parent: Node, child: Node): Node // Adds a child to a parent
+func runAction(node: Node, action: Action): Node // Runs an action on a node
+func color(node: Node, r: int, g: int, b: int): Node // Sets the color of a node
+func opacity(node: Node, opacity: int): Node // Sets the opacity of a node
+func text(node: Node, text: str): Node // Sets the text of a node
+func font(node: Node, font: str): Node // Sets the font of a node
 
-	terminate(): void
-		- Destroys the TinyNode
-	self_menu(): Node
-		- Returns the menu of the TinyNode
-	self(): Node
-		- Returns the TinyNode itself
-	popup(str, str, str): void
-		- Creates a popup with a title, message, and button text
-	prompt(str, str, str): void
-		- Creates a prompt with a title, placeholder, and callback
-		- The callback takes the name of a function
+func Sequence(action1: Action, action2: Action): Action // Creates a new sequence action
+func Delay(time: float): Action // Creates a new delay action
+func MoveTo(time: float, x: float, y: float): Action // Creates a new move to action
+func MoveBy(time: float, x: float, y: float): Action // Creates a new move by action
+func ScaleTo(time: float, scale: float): Action // Creates a new scale to action
+func ScaleBy(time: float, scale: float): Action // Creates a new scale by action
+func RotateTo(time: float, angle: float): Action // Creates a new rotate to action
+func RotateBy(time: float, angle: float): Action // Creates a new rotate by action
+func FadeTo(time: float, opacity: float): Action // Creates a new fade to action
+func FadeBy(time: float, opacity: float): Action // Creates a new fade by action
 
-	Sequence(Action, Action): Action
-		- Creates a CCSequence with two actions
-	Delay(float): Action
-		- Creates a CCDelayTime action
-	MoveTo(float, float, float): Action
-		- Creates a CCMoveTo action, takes time, x, and y
-	MoveBy(float, float, float): Action
-		- Creates a CCMoveBy action, takes time, x, and y
-	ScaleTo(float, float): Action
-		- Creates a CCScaleTo action, takes time and scale
-	ScaleBy(float, float): Action
-		- Creates a CCScaleBy action, takes time and scale
-	RotateTo(float, float): Action
-		- Creates a CCRotateTo action, takes time and angle
-	RotateBy(float, float): Action
-		- Creates a CCRotateBy action, takes time and angle
-	FadeTo(float, float): Action
-		- Creates a CCFadeTo action, takes time and opacity
-	FadeBy(float, float): Action
-		- Creates a CCFadeTo action, takes time and opacity
-
+func popup(title: str, message: str, button: str): void // Shows a popup
+func prompt(title: str, placeholder: str, callback: str): void // Shows a prompt
+func terminate(): void // Terminates the TinyNode, removes it from parent
+func self_menu(): Node // Returns the menu of the TinyNode
+func self(): Node // Returns the TinyNode itself
+func getGlobal(name: str): Node // Gets global node (bind a node using bindGlobal in cpp)
+```

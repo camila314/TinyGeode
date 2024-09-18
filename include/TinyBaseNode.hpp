@@ -178,6 +178,10 @@ namespace tiny_geode {
 			return true;
 		}
 
+		inline bool hasFunction(std::string const& name) {
+			return Tiny_GetFunctionIndex(m_state, name.c_str()) != -1;
+		}
+
 		template <TemplateStr name, typename F>
 		void bindFunction(F fn) {
 			_bindFunction<name>(typename extract_fn<F>::fn_type(fn));
