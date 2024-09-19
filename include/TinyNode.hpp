@@ -43,6 +43,13 @@ namespace tiny_geode {
 
 			bindFunction<"Sprite(str): Node">([=](std::string name) -> auto {
 				auto spr = CCSprite::createWithSpriteFrameName(name.c_str());
+
+				// because textureldr wants to be silly
+				auto fr = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(name.c_str());
+				if (name != fr->getFrameName()) {
+					spr = nullptr;
+				}
+
 				if (spr == nullptr)
 					spr = CCSprite::create(name.c_str());
 				if (spr == nullptr)
