@@ -1,5 +1,5 @@
 func onText(txt: str) {
-	self()->fetch(1)->text(txt)
+	self->fetch(1)->text(txt)
 } 
 
 func btn() {
@@ -7,7 +7,7 @@ func btn() {
 }
 
 func main() {
-	z(self_menu(), 999)
+	self_menu->z(999)
 
 	Scale9Sprite(200.0, 100.0, "GJ_square01.png")
 		->pos(0.0, 20.0)

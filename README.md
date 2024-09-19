@@ -58,7 +58,10 @@ func FadeBy(time: float, opacity: float): Action // Creates a new fade by action
 func popup(title: str, message: str, button: str): void // Shows a popup
 func prompt(title: str, placeholder: str, callback: str): void // Shows a prompt
 func terminate(): void // Terminates the TinyNode, removes it from parent
-func self_menu(): Node // Returns the menu of the TinyNode
-func self(): Node // Returns the TinyNode itself
-func getGlobal(name: str): Node // Gets global node (bind a node using bindGlobal in cpp)
+```
+
+These are the default variables available:
+```go
+self_menu: Node // The menu of the TinyNode
+self: Node // The TinyNode itself
 ```

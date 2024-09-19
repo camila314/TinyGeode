@@ -182,6 +182,12 @@ namespace tiny_geode {
 			return Tiny_GetFunctionIndex(m_state, name.c_str()) != -1;
 		}
 
+		template <typename T>
+		inline void bindVariable(std::string const& name, std::string const& type, T val) {
+			int idx = Tiny_BindGlobalVar(m_state, name.c_str(), type.c_str());
+			Tiny_SetGlobal(&m_thread, idx, tiny_converter<T>::to(&m_thread, val));
+		}
+
 		template <TemplateStr name, typename F>
 		void bindFunction(F fn) {
 			_bindFunction<name>(typename extract_fn<F>::fn_type(fn));

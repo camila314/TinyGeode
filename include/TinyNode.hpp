@@ -5,7 +5,7 @@ namespace tiny_geode {
 
 	class TinyNode : public TinyBaseNode {
 		CCMenu* m_menu;
-		std::unordered_map<std::string, CCNode*> m_nodeMap;
+		CCArray* m_nodeBinds;
 	public:
 		static TinyNode* create(std::string const& code) {
 			auto ret = new TinyNode();
@@ -19,8 +19,13 @@ namespace tiny_geode {
 			}
 		}
 
-		inline void bindGlobal(std::string const& name, CCNode* n) {
-			m_nodeMap[name] = n;
+		inline ~TinyNode() {
+			m_nodeBinds->release();
+		}
+
+		inline void bindNode(std::string const& name, CCNode* n) {
+			m_nodeBinds->addObject(n);
+			bindVariable(name, "Node", n);
 		}
 
 		inline void bindConstructors() {
@@ -330,17 +335,8 @@ namespace tiny_geode {
 				this->removeFromParentAndCleanup(true);
 			});
 
-			bindFunction<"self_menu(): Node">([=]() -> CCMenu* {
-				return m_menu;
-			});
-
-			bindFunction<"self(): Node">([=]() -> CCNode* {
-				return this;
-			});
-
-			bindFunction<"getGlobal(str): Node">([=](std::string name) {
-				return m_nodeMap[name];
-			});
+			bindNode("self", this);
+			bindNode("self_menu", m_menu);
 		}
 
 		inline bool init(std::string const& code) {
@@ -348,6 +344,8 @@ namespace tiny_geode {
 			m_menu = CCMenu::create();
 			m_menu->setPosition({0, 0});
 			this->addChild(m_menu);
+			m_nodeBinds = CCArray::create();
+			m_nodeBinds->retain();
 
 			registerType("Node");
 			registerType("Action");
